@@ -51,7 +51,7 @@ public class MailServiceImpl implements MailService {
             multipart.addBodyPart(bodyPart);
             message.setContent(multipart);
 
-            //Transport.send(message);
+            Transport.send(message);
             System.out.printf("Message was sent to %s\n", Arrays.toString(message.getAllRecipients()));
         } catch (MessagingException e) {
             e.printStackTrace();
