@@ -1,5 +1,6 @@
 package service.impl;
 
+import config.MailConfig;
 import entity.Recipient;
 import service.MailService;
 
@@ -10,31 +11,23 @@ import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Properties;
 
 public class MailServiceImpl implements MailService {
 
-    private final Properties properties;
-    private String userName;
-    private String password;
+    private MailConfig mailConfig;
 
-    public MailServiceImpl(String host, int port, String userName, String password) {
-        properties = new Properties();
-        properties.put("mail.smtp.auth", true);
-        properties.put("mail.smtp.starttls.enable", "true");
-        properties.put("mail.smtp.ssl.trust", "smtp.mailtrap.io");
-        properties.put("mail.smtp.host", host);
-        properties.put("mail.smtp.port", port);
-        this.userName = userName;
-        this.password = password;
+    public MailServiceImpl() {}
+
+    public MailServiceImpl(MailConfig config) {
+        mailConfig = config;
     }
 
     @Override
     public void sendEmail(String subject, String text, Recipient recipient) {
-        Session session = Session.getInstance(properties, new Authenticator() {
+        Session session = Session.getInstance(mailConfig.getProperties(), new Authenticator() {
             @Override
             protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication(userName, password);
+                return new PasswordAuthentication(mailConfig.getUserName(), mailConfig.getPassword());
             }
         });
 
@@ -65,19 +58,4 @@ public class MailServiceImpl implements MailService {
         }
     }
 
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
 }

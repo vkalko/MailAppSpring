@@ -1,6 +1,7 @@
 package repository.impl;
 
 import entity.Recipient;
+import org.springframework.beans.factory.annotation.Value;
 import repository.RecipientRepo;
 
 import java.sql.*;
@@ -9,16 +10,24 @@ import java.util.List;
 
 public class RecipientRepoImpl implements RecipientRepo {
 
+    @Value("${database.url}")
     private String dbURL;
+
+    @Value("${database.user}")
     private String userName;
+
+    @Value("${database.password}")
     private String password;
+
     private Connection connection;
 
-    public RecipientRepoImpl(String dbURL, String userName, String password) throws SQLException {
-        this.dbURL = dbURL;
-        this.userName = userName;
-        this.password = password;
-        connection = DriverManager.getConnection(dbURL, userName, password);
+    public RecipientRepoImpl() throws SQLException {
+        //connection = DriverManager.getConnection(dbURL, userName, password);
+    }
+
+    //for tests
+    public void setConnection(Connection connection) {
+        this.connection = connection;
     }
 
     @Override

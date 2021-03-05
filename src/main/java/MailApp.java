@@ -13,7 +13,7 @@ public class MailApp {
         recipientService.addRecipient("Mark", "mark@gmail.com");
         recipientService.addRecipient("Nick", "nick@gmail.com");
 
-        recipientService.doMailing("Special Promotion", "Hello! Here is our special offer: ...");
+        //recipientService.doMailing("Special Promotion", "Hello! Here is our special offer: ...");
 
     }
 }

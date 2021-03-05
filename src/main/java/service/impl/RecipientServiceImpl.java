@@ -9,6 +9,8 @@ import java.util.List;
 
 public class RecipientServiceImpl implements RecipientService {
 
+    public String name;
+
     private RecipientRepo recipientRepo;
     private MailService mailService;
 
