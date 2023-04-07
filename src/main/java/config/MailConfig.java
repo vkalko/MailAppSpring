@@ -8,7 +8,7 @@ import java.util.Properties;
 
 public class MailConfig {
 
-    @Value("#{props.mail.username}")
+    @Value("${props.mail.username}")
     private String userName;
 
     @Value("${props.mail.password}")
